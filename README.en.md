@@ -3,7 +3,7 @@
   <a href="README.md"><img alt="RUS" src="https://img.shields.io/badge/RUS-%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-2ea043?style=for-the-badge"></a>
 </p>
 
-# speech for Android · beta-0.6
+# speech for Android · beta-0.7
 
 **Sign language translation and speech-to-text on an Android phone**
 
@@ -19,6 +19,15 @@ The **speech** app helps people who are deaf or hard of hearing talk with people
 > 🔒 **Camera images never leave the phone** — signs are recognised on the phone itself. Speech is recognised by the Google speech service; with **Только на телефоне** (On device only) turned on, audio doesn't go to the internet either.
 
 ---
+
+## What's new in beta-0.7
+
+- **⚡ No more lag.** Moving signs are recognised about 5× faster: work already done is remembered, and each new frame computes only what is new. The result is the same — verified by tests.
+- **Recording a new sign.** The pause after recording is about 10× shorter: the new word is compared only with the other words instead of re-comparing the whole dictionary.
+- **Smoother camera.** Every frame used to create two new 1.2 MB images (about 70 MB per second), and memory clean-up caused stutters. Now the images are reused. Shoulders are searched every third frame — the time saved goes to the hands.
+- **Faster start-up** with a large dictionary.
+
+This version hasn't been tested on a real phone yet — if anything got worse, please open an [Issue](../../issues).
 
 ## What's new in beta-0.6
 
@@ -211,7 +220,7 @@ app/src/test/ — algorithm tests
 app/src/main/assets/ — MediaPipe models
 ```
 
-- **Tests:** `./gradlew test`, or in Android Studio right-click `app/src/test` → **Run Tests**. The algorithms are covered by 53 tests.
+- **Tests:** `./gradlew test`, or in Android Studio right-click `app/src/test` → **Run Tests**. The algorithms are covered by 56 tests.
 - **How recognition works:** camera → MediaPipe (hand points and shoulders) → smoothing → pose and movement features → k-NN / DTW → word. The algorithms are the same as in the iPhone version; see the [iPhone README](https://github.com/Fen1x678/sign_language_interpretation_on_camera/blob/main/README.en.md#how-it-works).
 - **Contributing:** open an Issue or a Pull Request. New contributors are welcome — translating the interface into English is a great first task.
 
